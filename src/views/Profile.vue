@@ -11,29 +11,7 @@
         :rule="item.rule"
         :errortext="item.error"
       ></Tinput>
-
-      <label>Aggreement Document</label>
-      <input
-        type="file"
-        name="aggreement"
-        id="agreement_link"
-        @change="uploadPic('agreement_link')"
-      />
-      <label>Partner Document</label>
-      <input
-        type="file"
-        name="partner"
-        id="partner_link"
-        @change="uploadPic('partner_link')"
-      />
-      <label>Insurance Document</label>
-      <input
-        type="file"
-        name="insurance"
-        id="insurance_link"
-        @change="uploadPic('insurance_link')"
-      />
-      <button @click="formsubmit">Register</button>
+      <button @click="formsubmit">Create Head Office User</button>
       <button @click="logout">LogOut</button>
     </div>
   </div>
@@ -41,7 +19,6 @@
 
 <script>
 import Tinput from "@/components/TInput.vue";
-import storage from "../plugin/firebase";
 
 export default {
   name: "Register",
@@ -67,26 +44,38 @@ export default {
         },
         {
           label: "Address",
-          model: "address_1",
-          holder: "Line 1 For Address"
+          model: "address",
+          holder: "Line 1 For Address",
+          rule: "^[a-zA-Z0-9]+(([',. -][a-zA-Z0-9 ])?[a-zA-Z0-9]*)*$",
+          error: "Enter address correctly"
         },
         {
-          model: "address_1",
-          holder: "Line 2 For Address"
+          label: "Department",
+          model: "department",
+          holder: "Enter Department Name",
+          rule: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+          error: "Enter Department Correctly"
+        },
+        {
+          label: "Date of joining",
+          model: "doj",
+          holder: "Enter Date of joining",
+          type: "date",
+          rule: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        {
+          label: "Date of birth",
+          model: "dob",
+          holder: "Enter Date of Birth",
+          type: "date",
+          rule: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
         },
         {
           label: "City",
           model: "city",
           holder: "Enter City Name",
-          rule: "^[a-zA-Z /S]*$",
+          rule: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
           error: "Enter City Name Correctly"
-        },
-        {
-          label: "District",
-          model: "district",
-          holder: "Enter District Name",
-          rule: "^[a-zA-Z /S]*$",
-          error: "Enter District Name Correctly"
         },
         {
           label: "Pincode",
@@ -99,7 +88,7 @@ export default {
           label: "State",
           model: "state",
           holder: "Enter State Name",
-          rule: "^[a-zA-Z /S]*$",
+          rule: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
           error: "Enter State Name Correctly"
         },
         {
@@ -110,46 +99,11 @@ export default {
           error: "Enter Correct Email"
         },
         {
-          label: "Telephone",
-          model: "telephone",
-          holder: "Enter Telephone No",
-          rule: "^[0-9]{10}$",
-          error: "Enter Telephone No Correctly"
-        },
-        {
-          label: "GST",
-          model: "gst",
-          holder: "Enter GST Details",
-          rule:
-            "^([0][1-9]|[1-2][0-9]|[3][0-5])([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Zs]{1})+$",
-          error: "Enter Correct GST Details"
-        },
-        {
-          label: "PAN",
-          model: "pan",
-          holder: "Enter PAN Details",
-          rule: "^[A-Za-z]{5}d{4}[A-Za-z]{1}$",
-          error: "Enter Correct PAN Details"
-        },
-        {
-          label: "SPOC Name",
-          model: "spoc_name",
-          holder: "Enter Spoc Name",
-          rule: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-          error: "Enter Name Correctly"
-        },
-        {
-          label: "SPOC Phone",
-          model: "spoc_phone",
-          holder: "Enter Spoc Phone No",
-          rule: "^[0-9]{10}$",
-          error: "Enter Phone No Correctly"
-        },
-        {
-          label: "Insurance Expire",
-          model: "insurance_exp",
-          holder: "Enter Date of Insurance Expire",
-          type: "date"
+          label: "Aadhaar Number",
+          model: "aadhaar_no",
+          holder: "Enter Aadhaar Number",
+          rule: "^[0-9]{12}$",
+          error: "Enter Correct Aadhaar number"
         },
         {
           label: "Bank Name",
@@ -179,38 +133,10 @@ export default {
     Tinput
   },
   created() {},
-  mounted() {
-    if (this.$store.state.user && this.$store.state.isAuth) {
-      document.getElementById("email").value = this.$store.state.user.email;
-    }
-  },
+  mounted() {},
   methods: {
     logout() {
-      this.$store.dispatch("logut");
-    },
-    uploadPic(link) {
-      var file = document.getElementById(link).files[0];
-      var storageRef = storage.ref();
-      var thisRef = storageRef.child(file.name + new Date());
-      if (file.size < 1024 * 1024) {
-        thisRef.put(file).then(() => {
-          thisRef.getDownloadURL().then(url => {
-            switch (link) {
-              case "agreement_link":
-                this.agreement_link = url;
-                break;
-              case "partner_link":
-                this.partner_link = url;
-                break;
-              case "insurance_link":
-                this.insurance_link = url;
-                break;
-              default:
-                break;
-            }
-          });
-        });
-      }
+      this.$store.dispatch("logout");
     },
     returndata() {
       var datasend = {};
@@ -224,7 +150,7 @@ export default {
     },
     formsubmit() {
       var tempData = JSON.stringify(this.returndata());
-      fetch("https://vahak-api-server.herokuapp.com/register/franchisee/", {
+      fetch("https://vahak-api-server.herokuapp.com/register/headoffice/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
