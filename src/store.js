@@ -9,7 +9,9 @@ export default new Vuex.Store({
   state: {
     user: null,
     userData: null,
-    isAuth: false
+    isAuth: false,
+    verifyFraData: null,
+    verifyOfcData: null
   },
   mutations: {
     setUser(state, payload) {
@@ -20,6 +22,12 @@ export default new Vuex.Store({
     },
     setUserData(state, payload) {
       state.userData = payload;
+    },
+    setVerifyFraData(state, payload) {
+      state.verifyFraData = payload;
+    },
+    setVerifyOfcData(state, payload) {
+      state.verifyOfcData = payload;
     }
   },
   actions: {
@@ -30,10 +38,19 @@ export default new Vuex.Store({
     setUserData({ commit }, data) {
       commit("setUserData", data);
     },
-    logut({ commit }) {
+    setVerifyFraData({ commit }, data) {
+      commit("setVerifyFraData", data);
+    },
+    setVerifyOfcData({ commit }, data) {
+      commit("setVerifyOfcData", data);
+    },
+    logout({ commit }) {
       commit("setAuth", false);
       commit("setUserData", null);
       commit("setUser", null);
+      commit("setVerifyFraData", null);
+      commit("setVerifyOfcData", null);
+
       router.push("/");
     }
   }

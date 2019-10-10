@@ -91,13 +91,13 @@ export default {
           rule: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
           error: "Enter State Name Correctly"
         },
-        {
-          label: "Email",
-          model: "email",
-          holder: "Enter Email Address",
-          rule: ".+@.+",
-          error: "Enter Correct Email"
-        },
+        // {
+        //   label: "Email",
+        //   model: "email",
+        //   holder: "Enter Email Address",
+        //   rule: ".+@.+",
+        //   error: "Enter Correct Email"
+        // },
         {
           label: "Aadhaar Number",
           model: "aadhaar_no",
@@ -146,11 +146,12 @@ export default {
             this.data[i].model
           ).value;
       }
+      datasend["email"] = this.$store.state.user.email;
       return datasend;
     },
     formsubmit() {
       var tempData = JSON.stringify(this.returndata());
-      fetch("https://vahak-api-server.herokuapp.com/register/headoffice/", {
+      fetch("https://vahak-api-server.herokuapp.com/update/headoffice/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -159,7 +160,6 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(data => {
-          console.log(data);
           this.$store.dispatch("setUserData", data);
         });
     }

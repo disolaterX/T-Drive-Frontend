@@ -25,7 +25,6 @@
       name="psw"
       required
     />
-
     <label for="psw-repeat">
       <b>Repeat Password</b>
     </label>
@@ -65,7 +64,8 @@ export default {
           },
           body: JSON.stringify({
             email: this.email,
-            passHash: this.password
+            passHash: this.password,
+            userType: "headoffice"
           })
         })
           .then(res => res.json()) // Transform the data into json
@@ -78,14 +78,13 @@ export default {
                 },
                 body: JSON.stringify({
                   email: this.email,
-                  passHash: this.password,
-                  userType: "Admin"
+                  passHash: this.password
                 })
               })
                 .then(res => res.json()) // Transform the data into json
                 .then(user => {
                   fetch(
-                    "https://vahak-api-server.herokuapp.com/register/franchisee/",
+                    "https://vahak-api-server.herokuapp.com/register/headoffice/",
                     {
                       method: "POST",
                       headers: {
@@ -98,7 +97,7 @@ export default {
                     }
                   )
                     .then(res => res.json()) // Transform the data into json
-                    .then(data => {
+                    .then(() => {
                       this.$store.dispatch("setUser", user);
                       this.$router.push("/profile");
                     });

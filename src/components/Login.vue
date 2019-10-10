@@ -9,7 +9,13 @@
       <label for="psw">
         <b>Password</b>
       </label>
-      <input type="password" v-model="password" placeholder="Enter Password" name="psw" required />
+      <input
+        type="password"
+        v-model="password"
+        placeholder="Enter Password"
+        name="psw"
+        required
+      />
 
       <button @click="gg" type="submit">Login</button>
     </div>
@@ -38,7 +44,6 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(user => {
-          console.log(user);
           this.$store.dispatch("setUser", user);
           this.$router.push("/profile");
         });
