@@ -24,9 +24,7 @@
         <td v-else>Disabled User</td>
 
         <td class="actionBtn">
-          <button v-if="item.is_verifed == false" @click="verifyUser(item)">
-            Verify
-          </button>
+          <button v-if="item.is_verifed == false" @click="verifyUser(item)">Verify</button>
           <button v-else @click="verifyUser(item)">Disable</button>
           <button @click="showDetails(item)">See Details</button>
         </td>
@@ -82,7 +80,7 @@ export default {
         selectedUserData["is_verifed"] = false;
       }
 
-      fetch("https://vahak-api-server.herokuapp.com/register/franchisee/", {
+      fetch("https://vahak-api-server.herokuapp.com/update/franchisee/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
