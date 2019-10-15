@@ -11,7 +11,8 @@ export default new Vuex.Store({
     userData: null,
     isAuth: false,
     verifyFraData: null,
-    verifyOfcData: null
+    verifyOfcData: null,
+    verifyDriData: null
   },
   mutations: {
     setUser(state, payload) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     setVerifyOfcData(state, payload) {
       state.verifyOfcData = payload;
+    },
+    setVerifyDriData(state, payload) {
+      state.verifyDriData = payload;
     }
   },
   actions: {
@@ -44,13 +48,16 @@ export default new Vuex.Store({
     setVerifyOfcData({ commit }, data) {
       commit("setVerifyOfcData", data);
     },
+    setVerifyDriData({ commit }, data) {
+      commit("setVerifyDriData", data);
+    },
     logout({ commit }) {
       commit("setAuth", false);
       commit("setUserData", null);
       commit("setUser", null);
       commit("setVerifyFraData", null);
       commit("setVerifyOfcData", null);
-
+      commit("setVerifyDriData", null);
       router.push("/");
     }
   }
