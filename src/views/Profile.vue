@@ -113,6 +113,13 @@ export default {
           error: "Enter Bank Name Correctly"
         },
         {
+          label: "Branch Name",
+          model: "branch_name",
+          holder: "Enter Branch Name",
+          rule: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+          error: "Enter Branch Name Correctly"
+        },
+        {
           label: "Account No",
           model: "account_no",
           holder: "Enter Account No",

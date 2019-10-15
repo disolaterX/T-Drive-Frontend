@@ -79,7 +79,7 @@ export default {
     };
   },
   created() {
-    if (this.$store.state.user.userType == "admin") {
+    if (this.$store.state.user && this.$store.state.user.userType == "admin") {
       this.fetchUpdatedData();
     } else {
       this.$router.push("/");
