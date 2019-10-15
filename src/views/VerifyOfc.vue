@@ -21,7 +21,13 @@
           @keyup="handleSearch"
         />
         <ul v-if="searchOutput !== null">
-          <li v-for="(i, idx) in searchOutput" :key="idx" @click="handleFranchisee(i)">{{ i.name }}</li>
+          <li
+            v-for="(i, idx) in searchOutput"
+            :key="idx"
+            @click="handleFranchisee(i)"
+          >
+            {{ i.name }}
+          </li>
         </ul>
       </span>
     </span>
@@ -38,7 +44,9 @@
         <td v-if="item.is_verifed == true">Verifed User</td>
         <td v-else>Disabled User</td>
         <td class="actionBtn">
-          <button v-if="item.is_verifed == false" @click="verifyUser(item)">Verify</button>
+          <button v-if="item.is_verifed == false" @click="verifyUser(item)">
+            Verify
+          </button>
           <button v-else @click="verifyUser(item)">Disable</button>
           <button @click="showDetails(item)">See Details</button>
           <button @click="assignFranchisee(item)">Assign Franchisee</button>
