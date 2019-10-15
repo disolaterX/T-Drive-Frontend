@@ -66,6 +66,11 @@ const router = new Router({
       path: "/batteryreg",
       name: "Battery Registration",
       component: () => import("@/views/BatteryForm.vue")
+    },
+    {
+      path: "/vehiclereg",
+      name: "Vehicle Registration",
+      component: () => import("@/views/VehicleForm.vue")
     }
   ]
 });
