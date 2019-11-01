@@ -158,7 +158,7 @@ export default {
     },
     formsubmit() {
       var tempData = JSON.stringify(this.returndata());
-      fetch("https://vahak-api-server.herokuapp.com/update/headoffice/", {
+      fetch("https://vahak-api-server.herokuapp.com/admin/update/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -167,7 +167,9 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(data => {
-          this.$store.dispatch("setUserData", data);
+          if (data.message == "user updated") {
+            this.$store.dispatch("setUserData", this.returndata());
+          }
         });
     }
   }

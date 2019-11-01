@@ -91,7 +91,7 @@ export default {
     },
     formsubmit() {
       var tempData = JSON.stringify(this.returndata());
-      fetch("https://vahak-api-server.herokuapp.com/register/battery/", {
+      fetch("https://vahak-api-server.herokuapp.com/battery/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

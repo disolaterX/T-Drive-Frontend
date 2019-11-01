@@ -7,24 +7,12 @@
     <label for="email">
       <b>Email</b>
     </label>
-    <input
-      type="text"
-      v-model="email"
-      placeholder="Enter Email"
-      name="email"
-      required
-    />
+    <input type="text" v-model="email" placeholder="Enter Email" name="email" required />
 
     <label for="psw">
       <b>Password</b>
     </label>
-    <input
-      type="password"
-      v-model="password"
-      placeholder="Enter Password"
-      name="psw"
-      required
-    />
+    <input type="password" v-model="password" placeholder="Enter Password" name="psw" required />
     <label for="psw-repeat">
       <b>Repeat Password</b>
     </label>
@@ -70,6 +58,8 @@ export default {
         })
           .then(res => res.json()) // Transform the data into json
           .then(data => {
+            console.log(data);
+
             if (data.message === "done") {
               fetch("https://vahak-api-server.herokuapp.com/auth/login/", {
                 method: "POST",
@@ -83,8 +73,10 @@ export default {
               })
                 .then(res => res.json()) // Transform the data into json
                 .then(user => {
+                  console.log(user);
+
                   fetch(
-                    "https://vahak-api-server.herokuapp.com/register/headoffice/",
+                    "https://vahak-api-server.herokuapp.com/admin/register/",
                     {
                       method: "POST",
                       headers: {
@@ -96,8 +88,10 @@ export default {
                       })
                     }
                   )
-                    .then(res => res.json()) // Transform the data into json
-                    .then(() => {
+                    .then(rres => rres.json()) // Transform the data into json
+                    .then(userData => {
+                      console.log(userData);
+                      this.$store.dispatch("setUserData", userData);
                       this.$store.dispatch("setUser", user);
                       this.$router.push("/profile");
                     });

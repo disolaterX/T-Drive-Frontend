@@ -21,13 +21,7 @@
           @keyup="handleSearch"
         />
         <ul v-if="searchOutput !== null">
-          <li
-            v-for="(i, idx) in searchOutput"
-            :key="idx"
-            @click="handleFranchisee(i)"
-          >
-            {{ i.name }}
-          </li>
+          <li v-for="(i, idx) in searchOutput" :key="idx" @click="handleFranchisee(i)">{{ i.name }}</li>
         </ul>
       </span>
     </span>
@@ -44,9 +38,7 @@
         <td v-if="item.is_verifed == true">Verifed User</td>
         <td v-else>Disabled User</td>
         <td class="actionBtn">
-          <button v-if="item.is_verifed == false" @click="verifyUser(item)">
-            Verify
-          </button>
+          <button v-if="item.is_verifed == false" @click="verifyUser(item)">Verify</button>
           <button v-else @click="verifyUser(item)">Disable</button>
           <button @click="showDetails(item)">See Details</button>
           <button @click="assignFranchisee(item)">Assign Franchisee</button>
@@ -100,7 +92,7 @@ export default {
       }
     },
     fetchUpdatedData() {
-      fetch("https://vahak-api-server.herokuapp.com/fetch/headoffice-verify/", {
+      fetch("https://vahak-api-server.herokuapp.com/admin/fetch-all", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -129,16 +121,13 @@ export default {
       this.assignFranchiseeUser["assigned_franchisee_uid"] = franchisee.uid;
       this.assignFranchiseeUser["assigned_franchisee_name"] = franchisee.name;
 
-      fetch(
-        "https://vahak-api-server.herokuapp.com/update/headoffice/setfranchisee",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(this.assignFranchiseeUser)
-        }
-      )
+      fetch("https://vahak-api-server.herokuapp.com/admin/setfranchisee", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.assignFranchiseeUser)
+      })
         .then(res => res.json()) // Transform the data into json
         .then(() => {
           this.fetchUpdatedData();
@@ -178,7 +167,7 @@ export default {
         selectedUserData["assigned_franchisee_name"] = [];
       }
 
-      fetch("https://vahak-api-server.herokuapp.com/update/headoffice/", {
+      fetch("https://vahak-api-server.herokuapp.com/admin/update/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

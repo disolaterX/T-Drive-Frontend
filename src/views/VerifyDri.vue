@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     fetchUpdatedData() {
-      fetch("https://vahak-api-server.herokuapp.com/fetch/driver-verfiy/", {
+      fetch("https://vahak-api-server.herokuapp.com/driver/fetch-all", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -65,8 +65,6 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(data => {
-          console.log(data);
-
           this.$store.dispatch("setVerifyDriData", data);
         });
     },
@@ -91,7 +89,7 @@ export default {
         selectedUserData["is_verifed"] = false;
       }
 
-      fetch("https://vahak-api-server.herokuapp.com/update/driver", {
+      fetch("https://vahak-api-server.herokuapp.com/driver/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

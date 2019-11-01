@@ -9,13 +9,7 @@
       <label for="psw">
         <b>Password</b>
       </label>
-      <input
-        type="password"
-        v-model="password"
-        placeholder="Enter Password"
-        name="psw"
-        required
-      />
+      <input type="password" v-model="password" placeholder="Enter Password" name="psw" required />
 
       <button @click="gg" type="submit">Login</button>
     </div>
@@ -44,8 +38,19 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(user => {
-          this.$store.dispatch("setUser", user);
-          this.$router.push("/profile");
+          fetch("https://vahak-api-server.herokuapp.com/franchisee/fetch/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: this.email })
+          })
+            .then(fres => fres.json()) // Transform the data into json
+            .then(userData => {
+              this.$store.dispatch("setUserData", userData);
+              this.$store.dispatch("setUser", user);
+              this.$router.push("/profile");
+            });
         });
     }
   }

@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     fetchUpdatedData() {
-      fetch("https://vahak-api-server.herokuapp.com/fetch/franchisee-verfiy/", {
+      fetch("https://vahak-api-server.herokuapp.com/franchisee/fetch-all", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -80,7 +80,7 @@ export default {
         selectedUserData["is_verifed"] = false;
       }
 
-      fetch("https://vahak-api-server.herokuapp.com/update/franchisee/", {
+      fetch("https://vahak-api-server.herokuapp.com/franchisee/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
