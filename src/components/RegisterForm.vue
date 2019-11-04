@@ -91,9 +91,14 @@ export default {
                     .then(rres => rres.json()) // Transform the data into json
                     .then(userData => {
                       console.log(userData);
-                      this.$store.dispatch("setUserData", userData);
-                      this.$store.dispatch("setUser", user);
-                      this.$router.push("/profile");
+                      if (userData.message == "done") {
+                        this.$store.dispatch("setUserData", {
+                          email: this.email,
+                          uid: user.uid
+                        });
+                        this.$store.dispatch("setUser", user);
+                        this.$router.push("/profile");
+                      }
                     });
                 });
             }

@@ -38,7 +38,7 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(user => {
-          fetch("https://vahak-api-server.herokuapp.com/franchisee/fetch/", {
+          fetch("https://vahak-api-server.herokuapp.com/admin/fetch/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
