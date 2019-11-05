@@ -38,21 +38,23 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(user => {
-          fetch("https://vahak-api-server.herokuapp.com/admin/fetch/", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email: this.email })
-          })
-            .then(fres => fres.json()) // Transform the data into json
-            .then(userData => {
-              if (!userData.message) {
+          if (!user.message) {
+            fetch("https://vahak-api-server.herokuapp.com/admin/fetch/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ email: this.email })
+            })
+              .then(fres => fres.json()) // Transform the data into json
+              .then(userData => {
+                console.log(userData);
+
                 this.$store.dispatch("setUserData", userData);
                 this.$store.dispatch("setUser", user);
                 this.$router.push("/profile");
-              }
-            });
+              });
+          }
         });
     }
   }
