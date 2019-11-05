@@ -10,7 +10,7 @@
     <router-link to="/verifyofc">
       <img src="../assets/icons/users.svg" class="icons-nav" />Sales Person
     </router-link>
-    <router-link to="/verifyfra">
+    <router-link to="/franchisees">
       <img src="../assets/icons/franchisee.svg" class="icons-nav" />Franchise
     </router-link>
     <router-link to="/batteryreg">
