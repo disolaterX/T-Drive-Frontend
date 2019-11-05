@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+    <defs>
+        <style>
+            .cls-1{opacity:.302}.cls-2{fill:none}
+        </style>
+    </defs>
+    <g id="_2" data-name="2" transform="translate(-20 -220)">
+        <g id="ic_apps" class="cls-1">
+            <path id="Base" d="M0 0h30v30H0z" class="cls-2" transform="translate(20 220)"/>
+            <path id="Icon" d="M39 243h4v-4h-4zm0-6h4v-4h-4zm-6-6h4v-4h-4zm6-4v4h4v-4zm-6 10h4v-4h-4zm-6 0h4v-4h-4zm0 6h4v-4h-4zm6 0h4v-4h-4zm-6-12h4v-4h-4z"/>
+        </g>
+    </g>
+</svg>

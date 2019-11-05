@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+    <defs>
+        <style>
+            .cls-1{fill:none}.cls-2{fill:#27b89b}
+        </style>
+    </defs>
+    <g id="_1" data-name="1" transform="translate(-20 -150)">
+        <g id="ic_home">
+            <path id="Base" d="M0 0h30v30H0z" class="cls-1" transform="translate(20 150)"/>
+            <path id="Icon" d="M33 172v-6h4v6h5v-8h3l-10-9-10 9h3v8z" class="cls-2"/>
+        </g>
+    </g>
+</svg>
