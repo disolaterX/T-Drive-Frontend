@@ -47,9 +47,11 @@ export default {
           })
             .then(fres => fres.json()) // Transform the data into json
             .then(userData => {
-              this.$store.dispatch("setUserData", userData);
-              this.$store.dispatch("setUser", user);
-              this.$router.push("/profile");
+              if (!userData.message) {
+                this.$store.dispatch("setUserData", userData);
+                this.$store.dispatch("setUser", user);
+                this.$router.push("/profile");
+              }
             });
         });
     }
