@@ -47,7 +47,7 @@ html {
 }
 .content-route {
   margin: 0 0 0 15%;
-  padding-top: 5% !important;
+  padding-top: 10% !important;
   width: 85%;
   height: 100vh;
   overflow-x: auto;

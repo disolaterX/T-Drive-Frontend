@@ -71,6 +71,11 @@ const router = new Router({
       path: "/vehiclereg",
       name: "Vehicle Registration",
       component: () => import("@/views/VehicleForm.vue")
+    },
+    {
+      path: "/test",
+      name: "test",
+      component: () => import("@/components/FranchiseeList.vue")
     }
   ]
 });
