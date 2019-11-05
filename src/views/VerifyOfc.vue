@@ -71,6 +71,8 @@ export default {
     };
   },
   created() {
+    console.log(this.$store.state.user);
+
     if (this.$store.state.user && this.$store.state.user.userType == "admin") {
       this.fetchUpdatedData();
     } else {
