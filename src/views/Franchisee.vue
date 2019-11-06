@@ -29,20 +29,19 @@
         <th>Rental Income</th>
         <th>Profile</th>
       </tr>
-      <tr
-        class="flist-list-data"
-        v-for="(i,idx) in listData"
-        :key="idx"
-        @click="()=>{this.$router.push({name: 'Franchisee Detail', params: { data: i,lastpage: '/farnchisee' } })}"
-      >
+      <tr class="flist-list-data" v-for="(i,idx) in listData" :key="idx" @click="opendetails(i)">
         <th>{{i.name}}</th>
         <th v-if="i.date_of_activation">{{i.date_of_activation.split('T')[0]}}</th>
         <th v-else></th>
         <th>{{i.email}}</th>
         <th>2229</th>
         <th>
-          <button v-if="i.is_verifed" class="active-btn" @click="()=>{changeStatus(0,i)}">ACTIVE</button>
-          <button v-else class="non-active-btn" @click="()=>{changeStatus(1,i)}">Pending</button>
+          <button
+            v-if="i.is_verifed"
+            class="active-btn"
+            @click.stop="()=>{changeStatus(0,i)}"
+          >ACTIVE</button>
+          <button v-else class="non-active-btn" @click.stop="()=>{changeStatus(1,i)}">Pending</button>
         </th>
       </tr>
     </table>
@@ -69,6 +68,12 @@ export default {
     }
   },
   methods: {
+    opendetails(datai) {
+      this.$router.push({
+        name: "Franchisee Detail",
+        params: { data: datai, lastpage: "/franchisee" }
+      });
+    },
     handleSearch() {
       if (this.searchInput && this.searchInput.length > 0) {
         const filter = product =>
@@ -186,6 +191,10 @@ export default {
   background-color: #ffffff;
   height: 50px;
   margin: 0 0 20px 0;
+  cursor: pointer;
+}
+.flist-list-data:hover {
+  background-color: #f0f1f1;
 }
 .flist-list-data button {
   width: 125px;
@@ -226,7 +235,6 @@ export default {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-
 .flist-table td,
 .flist-table th {
   /* border: 1px solid #dddddd; */
@@ -248,7 +256,6 @@ export default {
   outline: none;
   padding: 5px 7px;
 }
-
 .flist-search img {
   position: absolute;
   right: 0px;
@@ -258,7 +265,6 @@ export default {
   align-items: center;
   margin: 0 0 50px 0;
 }
-
 .flist-action button {
   width: auto;
   height: 40px;
@@ -267,13 +273,11 @@ export default {
   color: #b1b1b1;
   outline: none;
 }
-
 .active-action {
   border: solid 1px #27b89b !important;
   color: #27b89b !important;
   background-color: #f7fffd !important;
 }
-
 .flist-action button:first-child {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -295,13 +299,11 @@ export default {
   align-items: center;
   margin: 0 0 25px 0;
 }
-
 .flist-head p {
   font-size: 30px;
   font-weight: bold;
   color: #ffa159;
 }
-
 .flist-head button {
   width: 207px;
   height: 40px;

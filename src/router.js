@@ -75,6 +75,11 @@ const router = new Router({
       component: () => import("@/views/Franchisee.vue")
     },
     {
+      path: "/franchiseedetails",
+      name: "Franchisee Detail",
+      component: () => import("@/views/Franchiseedetail.vue")
+    },
+    {
       path: "/alluser",
       name: "All User",
       component: () => import("@/views/AllUser.vue")
