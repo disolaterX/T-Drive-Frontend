@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <style>
+            .cls-1{fill:none}.cls-2{fill:#ffa159}
+        </style>
+    </defs>
+    <g id="Group_48" data-name="Group 48" transform="translate(-1341 -731)">
+        <path id="Rectangle_148" d="M0 0h60v60H0z" class="cls-1" data-name="Rectangle 148" transform="translate(1341 731)"/>
+        <g id="Franchise" transform="translate(1343.567 734.301)">
+            <g id="Group_45" data-name="Group 45">
+                <path id="Rectangle_195" d="M0 0h.686v.686H0z" class="cls-2" data-name="Rectangle 195" transform="translate(20.618 18.723)"/>
+                <path id="Rectangle_196" d="M0 0h.686v.686H0z" class="cls-2" data-name="Rectangle 196" transform="translate(20.618 21.739)"/>
+                <path id="Rectangle_197" d="M0 0h.686v.686H0z" class="cls-2" data-name="Rectangle 197" transform="translate(23.488 18.723)"/>
+                <path id="Rectangle_198" d="M0 0h.686v.686H0z" class="cls-2" data-name="Rectangle 198" transform="translate(23.488 21.739)"/>
+                <path id="Rectangle_199" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 199" transform="translate(24.815 51.545)"/>
+                <path id="Rectangle_200" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 200" transform="translate(24.815 52.068)"/>
+                <path id="Rectangle_201" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 201" transform="translate(25.952 51.545)"/>
+                <path id="Rectangle_202" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 202" transform="translate(25.952 52.068)"/>
+                <path id="Rectangle_203" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 203" transform="translate(1.766 51.545)"/>
+                <path id="Rectangle_204" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 204" transform="translate(1.766 52.068)"/>
+                <path id="Rectangle_205" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 205" transform="translate(2.288 51.545)"/>
+                <path id="Rectangle_206" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 206" transform="translate(2.288 52.068)"/>
+                <path id="Rectangle_207" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 207" transform="translate(51.367 51.545)"/>
+                <path id="Path_596" d="M62.889 59.286h1.216l-5.734-4.843v-5.217a1.035 1.035 0 0 0-1.009-1.058h-20.49v-5.552h.834v-8.365a1.034 1.034 0 0 1 1.009-1.058h5.794a1.034 1.034 0 0 1 1.009 1.058v8.364h5.7V39.9H49.63V26.345h3.044L35.82 12.109 19.052 26.345h2.722V39.9h-1.266v2.712h14.346v5.552H15.173a1.034 1.034 0 0 0-1.009 1.058V54.3l-5.87 4.984h1.087V64.7h-.506v1.083h6.869v-3.34a.414.414 0 0 1 .4-.423h2.314a.414.414 0 0 1 .4.423v3.341h2.277V64.7h-.634v-5.414h1.216l-5.541-4.68v-4.323h18.678v4.158l-5.705 4.844h1.087V64.7h-.506v1.083h6.87v-3.339a.414.414 0 0 1 .4-.423h2.314a.414.414 0 0 1 .4.423v3.341H42V64.7h-.634v-5.414h1.216l-5.705-4.819v-4.184h19.48v4.183l-5.677 4.82h1.087V64.7h-.506v1.083h6.87v-3.339a.414.414 0 0 1 .4-.423h2.314a.414.414 0 0 1 .4.423v3.341h2.277V64.7h-.634v-5.414zM34.27 35.751a.69.69 0 0 1-.673.705h-5.656a.69.69 0 0 1-.673-.705V29.82a.69.69 0 0 1 .673-.705H33.6a.69.69 0 0 1 .673.705zm-19.9 27.291a.275.275 0 0 1-.268.281h-2.26a.275.275 0 0 1-.268-.281v-2.368a.275.275 0 0 1 .268-.281H14.1a.275.275 0 0 1 .268.281zm20.855 0a.275.275 0 0 1-.268.281H32.7a.275.275 0 0 1-.268-.281v-2.368a.275.275 0 0 1 .268-.281h2.26a.275.275 0 0 1 .268.281zm21.528 0a.275.275 0 0 1-.268.281h-2.26a.274.274 0 0 1-.268-.281v-2.368a.274.274 0 0 1 .268-.281h2.26a.275.275 0 0 1 .268.281v2.369z" class="cls-2" data-name="Path 596" transform="translate(-8.294 -12.109)"/>
+                <path id="Rectangle_208" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 208" transform="translate(51.367 52.068)"/>
+                <path id="Rectangle_209" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 209" transform="translate(51.889 51.545)"/>
+                <path id="Rectangle_210" d="M0 0h.274v.274H0z" class="cls-2" data-name="Rectangle 210" transform="translate(51.889 52.068)"/>
+            </g>
+        </g>
+    </g>
+</svg>

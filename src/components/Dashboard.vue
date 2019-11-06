@@ -4,13 +4,13 @@
       <img src="../assets/icons/home.svg" class="icons-nav" />
       Home
     </router-link>
-    <router-link to="/profile">
+    <router-link to="/alluser">
       <img src="../assets/icons/user.svg" class="icons-nav" />Users
     </router-link>
-    <router-link to="/verifyofc">
+    <router-link to="/allsales">
       <img src="../assets/icons/users.svg" class="icons-nav" />Sales Person
     </router-link>
-    <router-link to="/franchisees">
+    <router-link to="/franchisee">
       <img src="../assets/icons/franchisee.svg" class="icons-nav" />Franchise
     </router-link>
     <router-link to="/batteryreg">

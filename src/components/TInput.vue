@@ -7,6 +7,8 @@
       class="tinput"
       :id="model"
       @blur="updatestatus"
+      :disabled="isdisable"
+      :value="value"
     />
     <span class="tinput-error" v-if="errorstatus">{{ errortext }}</span>
   </div>
@@ -21,7 +23,9 @@ export default {
     rule: { type: String, required: false, default: null },
     errortext: { type: String, required: false, default: "! Incorrect Entry" },
     type: { type: String, required: false, default: "text" },
-    model: { type: String, required: true, default: null }
+    model: { type: String, required: true, default: null },
+    isdisable: { type: Boolean, required: false, default: false },
+    value: { type: String, required: false, default: null }
   },
   data() {
     return {

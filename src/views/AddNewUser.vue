@@ -10,9 +10,11 @@
         :model="item.model"
         :rule="item.rule"
         :errortext="item.error"
+        :isdisable="item.isdisable"
+        :value="item.value"
       ></Tinput>
-      <button @click="formsubmit">Create Head Office User</button>
-      <button @click="logout">LogOut</button>
+      <button @click="formsubmit">Submit Details</button>
+      <button @click="()=>{}">Cancel</button>
     </div>
   </div>
 </template>
@@ -43,6 +45,13 @@ export default {
           error: "Enter Phone No Correctly"
         },
         {
+          label: "Email",
+          model: "email",
+          holder: "Enter Email Address",
+          rule: ".+@.+",
+          error: "Enter Correct Email"
+        },
+        {
           label: "Address",
           model: "address",
           holder: "Line 1 For Address",
@@ -54,7 +63,9 @@ export default {
           model: "department",
           holder: "Enter Department Name",
           rule: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-          error: "Enter Department Correctly"
+          error: "Enter Department Correctly",
+          isdisable: this.$route.params.isdisable,
+          value: this.$route.params.department
         },
         {
           label: "Date of joining",
@@ -91,13 +102,7 @@ export default {
           rule: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
           error: "Enter State Name Correctly"
         },
-        // {
-        //   label: "Email",
-        //   model: "email",
-        //   holder: "Enter Email Address",
-        //   rule: ".+@.+",
-        //   error: "Enter Correct Email"
-        // },
+
         {
           label: "Aadhaar Number",
           model: "aadhaar_no",
@@ -139,7 +144,9 @@ export default {
   components: {
     Tinput
   },
-  created() {},
+  created() {
+    // this.
+  },
   mounted() {},
   methods: {
     logout() {
@@ -153,26 +160,67 @@ export default {
             this.data[i].model
           ).value;
       }
-      datasend["email"] = this.$store.state.user.email;
+      // datasend["email"] = this.$store.state.user.email;
       return datasend;
     },
     formsubmit() {
-      var tempData = JSON.stringify(this.returndata());
-      fetch("https://vahak-api-server.herokuapp.com/admin/update/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: tempData
-      })
-        .then(res => res.json()) // Transform the data into json
-        .then(data => {
-          if (data.message == "user updated") {
-            console.log(this.returndata());
-            
-            this.$store.dispatch("setUserData", this.returndata());
-          }
-        });
+      if (this.returndata().email) {
+        var tempData = this.returndata();
+        fetch("https://vahak-api-server.herokuapp.com/auth/register/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: this.returndata().email,
+            passHash: "testing123",
+            userType: "headoffice"
+          })
+        })
+          .then(res => res.json()) // Transform the data into json
+          .then(data => {
+            console.log(data);
+            if (data.message === "done") {
+              fetch("https://vahak-api-server.herokuapp.com/auth/login/", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  email: this.returndata().email,
+                  passHash: "testing123"
+                })
+              })
+                .then(res => res.json()) // Transform the data into json
+                .then(user => {
+                  tempData["uid"] = user.uid;
+                  console.log(tempData);
+
+                  fetch(
+                    "https://vahak-api-server.herokuapp.com/admin/register/",
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json"
+                      },
+                      body: JSON.stringify(tempData)
+                    }
+                  )
+                    .then(rres => rres.json()) // Transform the data into json
+                    .then(userData => {
+                      if (userData.message == "done") {
+                        console.log("done");
+                        if (this.$route.params.lastpage) {
+                          this.$router.push(this.$route.params.lastpage);
+                        } else {
+                          this.$router.push("/");
+                        }
+                      }
+                    });
+                });
+            }
+          });
+      }
     }
   }
 };

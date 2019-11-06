@@ -10,6 +10,12 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: "/t",
+      name: "t",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "@/views/AddNewUser.vue")
+    },
+    {
       path: "/",
       name: "home",
       component: Home
@@ -64,10 +70,26 @@ const router = new Router({
       component: () => import("@/views/VehicleForm.vue")
     },
     {
-      path: "/franchisees",
-      name: "franchisee",
+      path: "/franchisee",
+      name: "Franchisee",
       component: () => import("@/views/Franchisee.vue")
-    }
+    },
+    {
+      path: "/alluser",
+      name: "All User",
+      component: () => import("@/views/AllUser.vue")
+    },
+    {
+      path: "/allsales",
+      name: "All Sales",
+      component: () => import("@/views/AllSales.vue")
+    },
+    {
+      path: "/addnew",
+      name: "Add New User",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "@/views/AddNewUser.vue")
+    },
   ]
 });
 

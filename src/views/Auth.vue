@@ -29,6 +29,11 @@ export default {
   components: {
     login,
     register
+  },
+  created() {
+    if (this.$store.state.user) {
+      this.$router.push("/");
+    }
   }
 };
 </script>

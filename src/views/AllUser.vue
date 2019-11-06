@@ -1,8 +1,8 @@
 <template>
   <div class="c-col flist-parent">
     <div class="c-row flist-head">
-      <p>Assigned franchisee</p>
-      <button>+ Assign New Franchise</button>
+      <p>All User</p>
+      <button @click="()=>{addnewuser()}">+ Add New User</button>
     </div>
     <div class="c-row flist-action">
       <span class="c-row action-btn-parent">
@@ -17,18 +17,16 @@
     </div>
     <table class="flist-table">
       <tr class="flist-list-heading">
-        <th>Franchise Name</th>
+        <th>User Name</th>
         <th>Joined</th>
         <th>Email</th>
-        <th>Rental Income</th>
         <th>Profile</th>
       </tr>
       <tr class="flist-list-data" v-for="(i,idx) in listData" :key="idx">
         <th>{{i.name}}</th>
-        <th v-if="i.date_of_activation">{{i.date_of_activation.split('T')[0]}}</th>
+        <th v-if="i.doj">{{i.doj.split('T')[0]}}</th>
         <th v-else></th>
         <th>{{i.email}}</th>
-        <th>2229</th>
         <th>
           <button v-if="i.is_verifed" class="active-btn" @click="()=>{changeStatus(0,i)}">ACTIVE</button>
           <button v-else class="non-active-btn" @click="()=>{changeStatus(1,i)}">Pending</button>
@@ -47,18 +45,21 @@ export default {
     };
   },
   created() {
-    if (this.$route.params.data) {
-      this.listData = this.$route.params.data;
-      this.tempListData = this.$route.params.data;
-    } else {
-      this.listData = null;
-      this.tempListData = null;
-      this.fetchAll();
-    }
+    this.fetchAll();
   },
   methods: {
+    addnewuser() {
+      this.$router.push({
+        name: "Add New User",
+        params: {
+          department: "headoffice",
+          isdisable: true,
+          lastpage: "/alluser"
+        }
+      });
+    },
     fetchAll() {
-      fetch("https://vahak-api-server.herokuapp.com/franchisee/fetch-all/", {
+      fetch("https://vahak-api-server.herokuapp.com/admin/fetch-all/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -66,10 +67,13 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(list => {
-          if (!list.message) {
-            this.listData = list;
-            this.tempListData = list;
-          }
+          this.listData = [];
+          list.forEach(e => {
+            if (e.email !== "vahak.llp@gmail.com") {
+              this.listData.push(e);
+            }
+          });
+          this.tempListData = this.listData;
         });
     },
     sortList(sel) {
@@ -133,7 +137,7 @@ export default {
       }
 
       setTimeout(() => {
-        fetch("https://vahak-api-server.herokuapp.com/franchisee/update/", {
+        fetch("https://vahak-api-server.herokuapp.com/admin/update/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

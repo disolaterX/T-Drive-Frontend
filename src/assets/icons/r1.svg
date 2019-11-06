@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <style>
+            .cls-1{fill:none}.cls-2{fill:#6f96ff}
+        </style>
+    </defs>
+    <g id="_5" data-name="5" transform="translate(-20 -430)">
+        <g id="ic_person" transform="translate(20 430)">
+            <path id="Base" d="M0 0h60v60H0z" class="cls-1"/>
+            <path id="Icon" d="M50 465.75c-7.677 0-23 3.853-23 11.5V483h46v-5.75c0-7.65-15.323-11.5-23-11.5zm0-5.75a11.5 11.5 0 1 0-11.5-11.5A11.5 11.5 0 0 0 50 460z" class="cls-2" transform="translate(-20 -430)"/>
+        </g>
+    </g>
+</svg>
