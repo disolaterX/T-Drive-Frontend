@@ -11,7 +11,13 @@
         <button @click="()=>{this.sortList(2)}">Terminated / Pending</button>
       </span>
       <div class="flist-search c-row">
-        <input type="search" name="search" placeholder="Search..." />
+        <input
+          type="search"
+          name="search"
+          placeholder="Search..."
+          v-model="searchInput"
+          @keyup="handleSearch"
+        />
         <img src="@/assets/search.svg" alt />
       </div>
     </div>
@@ -23,7 +29,12 @@
         <th>Rental Income</th>
         <th>Profile</th>
       </tr>
-      <tr class="flist-list-data" v-for="(i,idx) in listData" :key="idx">
+      <tr
+        class="flist-list-data"
+        v-for="(i,idx) in listData"
+        :key="idx"
+        @click="()=>{this.$router.push({name: 'Franchisee Detail', params: { data: i,lastpage: '/farnchisee' } })}"
+      >
         <th>{{i.name}}</th>
         <th v-if="i.date_of_activation">{{i.date_of_activation.split('T')[0]}}</th>
         <th v-else></th>
@@ -43,7 +54,8 @@ export default {
   data() {
     return {
       listData: null,
-      tempListData: null
+      tempListData: null,
+      searchInput: null
     };
   },
   created() {
@@ -57,6 +69,19 @@ export default {
     }
   },
   methods: {
+    handleSearch() {
+      if (this.searchInput && this.searchInput.length > 0) {
+        const filter = product =>
+          product.email &&
+          product.email.toLowerCase().includes(this.searchInput.toLowerCase());
+        const a = this.tempListData.filter(filter);
+        if (a.length > 0) {
+          this.listData = a;
+        }
+      } else {
+        this.listData = this.listData;
+      }
+    },
     fetchAll() {
       fetch("https://vahak-api-server.herokuapp.com/franchisee/fetch-all/", {
         method: "POST",
