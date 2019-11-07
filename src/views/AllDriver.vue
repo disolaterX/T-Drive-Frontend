@@ -10,7 +10,13 @@
         <button @click="()=>{this.sortList(2)}">Terminated / Pending</button>
       </span>
       <div class="flist-search c-row">
-        <input type="search" name="search" placeholder="Search..." />
+        <input
+          type="search"
+          name="search"
+          placeholder="Search..."
+          v-model="searchInput"
+          @keyup="handleSearch"
+        />
         <img src="@/assets/search.svg" alt />
       </div>
     </div>
@@ -44,13 +50,29 @@ export default {
   data() {
     return {
       listData: null,
-      tempListData: null
+      tempListData: null,
+      searchInput: null
     };
   },
   created() {
     this.fetchAll();
   },
   methods: {
+    handleSearch() {
+      if (this.searchInput && this.searchInput.length > 0) {
+        const filter = product =>
+          product.email &&
+          product.email.toLowerCase().includes(this.searchInput.toLowerCase());
+        const a = this.listData.filter(filter);
+        if (a.length > 0) {
+          this.listData = a;
+        } else {
+          this.listData = this.tempListData;
+        }
+      } else {
+        this.listData = this.tempListData;
+      }
+    },
     fetchAll() {
       fetch("https://vahak-api-server.herokuapp.com/driver/fetch-all/", {
         method: "POST",
