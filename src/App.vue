@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <cheader></cheader>
-    <dashboard></dashboard>
-    <router-view class="content-route"></router-view>
+    <cheader v-if="this.$store.state.user && this.$store.state.userData"></cheader>
+    <dashboard v-if="this.$store.state.user && this.$store.state.userData"></dashboard>
+    <auth v-else></auth>
+    <router-view class="content-route" v-if="this.$store.state.user && this.$store.state.userData"></router-view>
   </div>
 </template>
 
 <script>
 import dashboard from "./components/Dashboard.vue";
 import cheader from "./components/Header.vue";
+import Auth from "@/views/Auth.vue";
 export default {
   data() {
     return {};
   },
-  components: { dashboard, cheader }
+  components: { dashboard, cheader, Auth }
 };
 </script>
 

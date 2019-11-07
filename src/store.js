@@ -58,7 +58,6 @@ export default new Vuex.Store({
       commit("setVerifyFraData", null);
       commit("setVerifyOfcData", null);
       commit("setVerifyDriData", null);
-      router.push("/");
     }
   }
 });

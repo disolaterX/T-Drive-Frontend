@@ -16,6 +16,9 @@
     <router-link to="/batteryreg">
       <img src="../assets/icons/other.svg" class="icons-nav" />Others
     </router-link>
+    <a @click="logout">
+      <img src="../assets/icons/logout.svg" class="icons-nav" />Logout
+    </a>
   </div>
 </template>
 
@@ -23,6 +26,11 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    }
   }
 };
 </script>
