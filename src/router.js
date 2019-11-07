@@ -13,7 +13,7 @@ const router = new Router({
       path: "/t",
       name: "t",
       component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/AddNewUser.vue")
+        import(/* webpackChunkName: "about" */ "@/views/AllDriver.vue")
     },
     {
       path: "/",
