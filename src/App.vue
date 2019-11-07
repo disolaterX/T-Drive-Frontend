@@ -55,4 +55,30 @@ html {
   overflow-x: auto;
   overflow-y: scroll;
 }
+.p-button {
+  background-color: #67d89f;
+  border-radius: 5px;
+  color: black;
+  padding: 8px 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.p-button:hover {
+  background-color: #5ac28e;
+}
+.s-button {
+  border: solid 1px #707070;
+  border-radius: 5px;
+  color: black;
+  padding: 8px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.s-button:hover {
+  background-color: rgb(231, 231, 231);
+}
 </style>
