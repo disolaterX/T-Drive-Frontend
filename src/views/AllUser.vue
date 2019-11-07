@@ -63,6 +63,8 @@ export default {
         const a = this.tempListData.filter(filter);
         if (a.length > 0) {
           this.listData = a;
+        } else {
+          this.listData = 0;
         }
       } else {
         this.listData = this.tempListData;
@@ -94,6 +96,7 @@ export default {
             }
           });
           this.tempListData = this.listData;
+          console.log(this.listData);
         });
     },
     sortList(sel) {

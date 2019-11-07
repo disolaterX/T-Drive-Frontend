@@ -67,7 +67,7 @@ export default {
         if (a.length > 0) {
           this.listData = a;
         } else {
-          this.listData = this.tempListData;
+          this.listData = 0;
         }
       } else {
         this.listData = this.tempListData;
