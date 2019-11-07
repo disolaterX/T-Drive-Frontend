@@ -97,7 +97,6 @@ export default {
                           uid: user.uid
                         });
                         this.$store.dispatch("setUser", user);
-                        this.$router.push("/profile");
                       }
                     });
                 });
