@@ -13,7 +13,7 @@ const router = new Router({
       path: "/t",
       name: "t",
       component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/AllDriver.vue")
+        import(/* webpackChunkName: "about" */ "@/components/comobobox.vue")
     },
     {
       path: "/",
@@ -90,10 +90,21 @@ const router = new Router({
       component: () => import("@/views/AllSales.vue")
     },
     {
+      path: "/allbattery",
+      name: "All Battery",
+      component: () => import("@/views/AllBattery.vue")
+    },
+    {
       path: "/addnew",
       name: "Add New User",
       component: () =>
         import(/* webpackChunkName: "about" */ "@/views/AddNewUser.vue")
+    },
+    {
+      path: "/userdetails",
+      name: "User Details",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "@/views/UserDetails.vue")
     },
   ]
 });

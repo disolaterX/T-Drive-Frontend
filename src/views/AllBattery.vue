@@ -1,14 +1,14 @@
 <template>
   <div class="c-col flist-parent">
     <div class="c-row flist-head">
-      <p>All User</p>
-      <button @click="()=>{addnewuser()}">+ Add New User</button>
+      <p>All Battery</p>
+      <button @click="()=>{addnewbattery()}">+ Add New Battery</button>
     </div>
     <div class="c-row flist-action">
       <span class="c-row action-btn-parent">
         <button class="active-action" @click="()=>{this.sortList(0)}">All</button>
-        <button @click="()=>{this.sortList(1)}">Approved</button>
-        <button @click="()=>{this.sortList(2)}">Terminated / Pending</button>
+        <!-- <button @click="()=>{this.sortList(1)}">Approved</button>
+        <button @click="()=>{this.sortList(2)}">Terminated / Pending</button>-->
       </span>
       <div class="flist-search c-row">
         <input
@@ -23,16 +23,17 @@
     </div>
     <table class="flist-table">
       <tr class="flist-list-heading">
-        <th>User Name</th>
-        <th>Joined</th>
-        <th>Email</th>
-        <th>Profile</th>
+        <th>Assigned Franchisee</th>
+        <th>Battery Type</th>
+        <th>Battery Serial</th>
+        <th>Purchase</th>
+        <th>Action</th>
       </tr>
       <tr class="flist-list-data" v-for="(i,idx) in listData" :key="idx" @click="opendetails(i)">
-        <th>{{i.name}}</th>
-        <th v-if="i.doj">{{i.doj.split('T')[0]}}</th>
-        <th v-else></th>
-        <th>{{i.email}}</th>
+        <th>{{nameList[idx]}}</th>
+        <th>{{i.battery_type}}</th>
+        <th>{{i.battery_serial}}</th>
+        <th>{{i.purchase.split('T')[0]}}</th>
         <th>
           <button v-if="i.is_verifed" class="active-btn">ACTIVE</button>
           <button v-else class="non-active-btn">Pending</button>
@@ -48,24 +49,47 @@ export default {
     return {
       listData: null,
       tempListData: null,
-      searchInput: null
+      searchInput: null,
+      nameList: [],
+      franchiseeList: null
     };
   },
   created() {
+    this.fetchFranchisee();
     this.fetchAll();
   },
   methods: {
-    opendetails(datai) {
-      this.$router.push({
-        name: "User Details",
-        params: { data: datai, lastpage: "/alluser" }
+    fetchFranchisee() {
+      fetch("https://vahak-api-server.herokuapp.com/franchisee/fetch-all/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(res => res.json()) // Transform the data into json
+        .then(list => {
+          if (!list.message) {
+            this.franchiseeList = list;
+          }
+        });
+    },
+    nameReturn() {
+      this.nameList = [];
+      this.listData.forEach(e1 => {
+        this.franchiseeList.forEach(e2 => {
+          if (e2.uid == e1.f_uid) {
+            this.nameList.push(e2.name);
+          }
+        });
       });
     },
     handleSearch() {
       if (this.searchInput && this.searchInput.length > 0) {
         const filter = product =>
-          product.email &&
-          product.email.toLowerCase().includes(this.searchInput.toLowerCase());
+          product.battery_serial &&
+          product.battery_serial
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase());
         const a = this.tempListData.filter(filter);
         if (a.length > 0) {
           this.listData = a;
@@ -76,18 +100,17 @@ export default {
         this.listData = this.tempListData;
       }
     },
-    addnewuser() {
+    addnewbattery() {
       this.$router.push({
-        name: "Add New User",
+        name: "Battery Registration",
         params: {
-          department: "headoffice",
-          isdisable: true,
-          lastpage: "/alluser"
+          lastpage: "/allbattery",
+          franchiseeList: this.franchiseeList
         }
       });
     },
     fetchAll() {
-      fetch("https://vahak-api-server.herokuapp.com/admin/fetch-all/", {
+      fetch("https://vahak-api-server.herokuapp.com/battery/fetch-all/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -95,14 +118,12 @@ export default {
       })
         .then(res => res.json()) // Transform the data into json
         .then(list => {
-          this.listData = [];
-          list.forEach(e => {
-            if (e.email !== "vahak.llp@gmail.com") {
-              this.listData.push(e);
-            }
-          });
-          this.tempListData = this.listData;
-          console.log(this.listData);
+          if (!list.message) {
+            // console.log(list);
+            this.listData = list;
+            this.tempListData = this.listData;
+            this.nameReturn();
+          }
         });
     },
     sortList(sel) {

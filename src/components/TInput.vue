@@ -3,7 +3,6 @@
     <span class="tinput-label" v-if="label">{{ label }}</span>
     <input
       :type="type"
-      :placeholder="title"
       class="tinput"
       :id="model"
       @blur="updatestatus"
@@ -73,12 +72,15 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 10px 0;
 }
 .tinput {
-  padding: 5px 5px;
-  border: 1px solid black;
-  border-radius: 2px;
-  width: 95%;
+  border: none;
+  background-color: #fffaf7;
+  outline: none;
+  height: 40px;
+  padding: 0px 10px;
+  border-bottom: 1px solid black;
   margin: 5px 0;
 }
 .tinput-label {

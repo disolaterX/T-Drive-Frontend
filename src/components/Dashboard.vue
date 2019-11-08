@@ -13,8 +13,11 @@
     <router-link to="/franchisee">
       <img src="../assets/icons/franchisee.svg" class="icons-nav" />Franchise
     </router-link>
-    <router-link to="/batteryreg">
+    <!-- <router-link to="/batteryreg">
       <img src="../assets/icons/other.svg" class="icons-nav" />Others
+    </router-link>-->
+    <router-link to="/allbattery">
+      <img src="../assets/icons/other.svg" class="icons-nav" />All Battery
     </router-link>
     <a @click="logout">
       <img src="../assets/icons/logout.svg" class="icons-nav" />Logout

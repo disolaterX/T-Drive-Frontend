@@ -10,6 +10,7 @@ export default new Vuex.Store({
     user: null,
     userData: null,
     isAuth: false,
+    allFranchisee: null,
     verifyFraData: null,
     verifyOfcData: null,
     verifyDriData: null
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     setVerifyDriData(state, payload) {
       state.verifyDriData = payload;
+    },
+    setFranchisee(state, payload) {
+      state.allFranchisee = payload;
     }
   },
   actions: {
@@ -50,6 +54,9 @@ export default new Vuex.Store({
     },
     setVerifyDriData({ commit }, data) {
       commit("setVerifyDriData", data);
+    },
+    setFranchisee({ commit }, data) {
+      commit("setFranchisee", data);
     },
     logout({ commit }) {
       commit("setAuth", false);

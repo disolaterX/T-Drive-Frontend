@@ -1,7 +1,7 @@
 <template>
   <div class="c-col flist-parent">
     <div class="c-row flist-head">
-      <p>Assigned franchisee</p>
+      <p>All Franchisee</p>
       <button>+ Assign New Franchise</button>
     </div>
     <div class="c-row flist-action">

@@ -28,14 +28,14 @@
         <th>Email</th>
         <th>Profile</th>
       </tr>
-      <tr class="flist-list-data" v-for="(i,idx) in listData" :key="idx">
+      <tr class="flist-list-data" v-for="(i,idx) in listData" :key="idx" @click="opendetails(i)">
         <th>{{i.name}}</th>
         <th v-if="i.doj">{{i.doj.split('T')[0]}}</th>
         <th v-else></th>
         <th>{{i.email}}</th>
         <th>
-          <button v-if="i.is_verifed" class="active-btn" @click="()=>{changeStatus(0,i)}">ACTIVE</button>
-          <button v-else class="non-active-btn" @click="()=>{changeStatus(1,i)}">Pending</button>
+          <button v-if="i.is_verifed" class="active-btn">ACTIVE</button>
+          <button v-else class="non-active-btn">Pending</button>
         </th>
       </tr>
     </table>
@@ -55,6 +55,12 @@ export default {
     this.fetchAll();
   },
   methods: {
+    opendetails(datai) {
+      this.$router.push({
+        name: "User Details",
+        params: { data: datai, lastpage: "/allsales" }
+      });
+    },
     handleSearch() {
       if (this.searchInput && this.searchInput.length > 0) {
         const filter = product =>
@@ -81,7 +87,12 @@ export default {
         .then(list => {
           this.listData = [];
           list.forEach(e => {
-            if (e.department && e.department == "sales") {
+            if (
+              e.department &&
+              e.department == "sales" &&
+              e.email &&
+              e.email !== "vahak.llp@gmail.com"
+            ) {
               this.listData.push(e);
             }
           });
@@ -134,33 +145,6 @@ export default {
           this.listData = this.tempListData;
           break;
       }
-    },
-    changeStatus(sel, data) {
-      var temp = data;
-      switch (sel) {
-        case 0:
-          temp["is_verifed"] = false;
-          break;
-        case 1:
-          temp["is_verifed"] = true;
-          break;
-        default:
-          break;
-      }
-
-      setTimeout(() => {
-        fetch("https://vahak-api-server.herokuapp.com/admin/update/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-        })
-          .then(res => res.json()) // Transform the data into json
-          .then(resp => {
-            this.fetchAll();
-          });
-      }, 100);
     },
     addnewsales() {
       this.$router.push({

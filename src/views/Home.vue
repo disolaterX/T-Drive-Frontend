@@ -84,6 +84,7 @@ export default {
         .then(list => {
           if (!list.message) {
             this.listData = list;
+            // this.$store.dispatch("setFranchisee", list);
             this.tempListData = list;
             if (this.tempListData.length > 8) {
               this.tempListData.length = 8;
