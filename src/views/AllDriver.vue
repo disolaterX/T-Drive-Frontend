@@ -91,9 +91,11 @@ export default {
             })
               .then(res => res.json()) // Transform the data into json
               .then(rideData => {
+                console.log(driverData);
                 if (!rideData.message) {
                   this.listData = driverData;
                   this.tempListData = this.listData;
+
                   console.log(rideData);
                   rideData.forEach(d1 => {
                     driverData.forEach(d2 => {
