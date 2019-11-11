@@ -1,95 +1,94 @@
 <template>
-  <div class="home c-col">
-    <div class="c-col report-parent">
-      <p class="report-parent-p">Report</p>
-      <div class="c-row report-data-parent">
-        <div class="c-row">
-          <img src="@/assets/icons/r1.svg" alt />
-          <span class="c-col report-data">
-            <p>Total Users</p>
-            <p>150</p>
-          </span>
-        </div>
-        <div class="c-row">
-          <img src="@/assets/icons/r2.svg" alt />
-          <span class="c-col report-data">
-            <p>Franchisee</p>
-            <p>15</p>
-          </span>
-        </div>
-        <div class="c-row">
-          <img src="@/assets/icons/r3.svg" alt />
-          <span class="c-col report-data">
-            <p>Franchisee Dist</p>
-            <p>15</p>
-          </span>
-        </div>
-      </div>
+  <div
+    v-if="this.$store.state.userimg&& this.$store.state.userimg != 'empty'"
+    class="grid-container"
+  >
+    <div
+      class="grid-item"
+      v-for="(i,idx) in this.$store.state.userimg"
+      :key="idx"
+      @click="()=>{openNew(i)}"
+    >
+      <img class="data-img" :src="i" alt />
+      <span>
+        <img src="@/assets/icons/gallery.svg" alt height="24" />
+        <p>{{i.split('/')[5]}}</p>
+      </span>
     </div>
-    <div class="c-col overview-parent">
-      <div class="c-row">
-        <p class="overview-parent-p">Franchisee Overview</p>
-        <a
-          @click="()=>{this.$router.push({name:'Franchisee' , params:{data:this.listData}})}"
-        >View All</a>
-      </div>
-      <table class="flist-table">
-        <tr class="flist-list-heading">
-          <th>S.No.</th>
-          <th>Franchise Name</th>
-          <th>Joined</th>
-          <th>Email</th>
-          <th>Rental Income</th>
-          <th>Profile</th>
-        </tr>
-        <tr class="flist-list-data" v-for="(i,idx) in tempListData" :key="idx">
-          <th>{{idx}}</th>
-          <th>{{i.name}}</th>
-          <th v-if="i.date_of_activation">{{i.date_of_activation.split('T')[0]}}</th>
-          <th v-else></th>
-          <th>{{i.email}}</th>
-          <th>2229</th>
-          <th>
-            <p v-if="i.is_verifed" class="active-btn">Active</p>
-            <p v-else class="non-active-btn">Pending</p>
-          </th>
-        </tr>
-      </table>
-    </div>
+  </div>
+  <div
+    v-else-if="this.$store.state.userimg && this.$store.state.userimg == 'empty'"
+    style="margin: auto;width: max-content;height: max-content;"
+  >
+    <img src="@/assets/upload.svg" style="width: 30em;height: 30em; " alt />
+    <p style="text-align: center;font-size: 18px;font-weight: bold;">Loading...</p>
+  </div>
+  <div v-else style="margin: 10% 50%;">
+    <img src="@/assets/loading.gif" style="width: 10em;height: 10em; " alt />
+    <p style="text-align: center;font-size: 18px;font-weight: bold;">Loading...</p>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
-    return {
-      listData: null,
-      tempListData: null
-    };
+    return {};
   },
   created() {
-    this.listData = null;
-    this.tempListData = null;
-    this.fetchAll();
+    console.log(this.$store.state.userimg);
+
+    this.fetchMyData();
   },
   methods: {
-    fetchAll() {
-      fetch("https://vahak-api-server.herokuapp.com/franchisee/fetch-all/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then(res => res.json()) // Transform the data into json
-        .then(list => {
-          if (!list.message) {
-            this.listData = list;
-            // this.$store.dispatch("setFranchisee", list);
-            this.tempListData = list;
-            if (this.tempListData.length > 8) {
-              this.tempListData.length = 8;
-            }
+    openNew(curl) {
+      window.open(curl, "_blank");
+    },
+    assign() {
+      this.file = 0;
+      this.fda = new FormData();
+      this.file = this.$refs.file.files;
+      for (let index = 0; index < this.file.length; index++) {
+        this.fda.append("file", this.file[index]);
+      }
+      this.fda.append("uid", "2323");
+    },
+    async test() {
+      axios
+        .post("https://travoapi.herokuapp.com/upload", this.fda, {
+          headers: {
+            "Content-Type": "multipart/form-data"
           }
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    fetchMyData() {
+      console.log("caaled");
+
+      axios
+        .post("https://travoapi.herokuapp.com/upload/fetch", {
+          findtag: this.$store.state.findtag,
+          pass: this.$store.state.pass
+        })
+        .then(res => {
+          var mydata = [];
+          res.data.forEach(element => {
+            mydata.push(element);
+            console.log(element);
+          });
+          this.$store.state.userimg = mydata;
+          if (mydata.length == 0) {
+            this.$store.state.userimg = "empty";
+          }
+          console.log(this.$store.state.userimg);
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   }
@@ -97,90 +96,46 @@ export default {
 </script>
 
 <style scoped>
-.flist-table {
-  font-family: arial, sans-serif;
-  border-collapse: separate;
-  border-spacing: 0 20px;
-  width: 100%;
-  margin-top: 20px;
-}
-.flist-table td,
-.flist-table th {
-  /* border: 1px solid #dddddd; */
-  text-align: center;
-  /* padding: 8px; */
-}
-.flist-list-heading th {
-  font-size: 16px;
-  font-weight: 500;
-  color: #b1b1b1;
-  text-align: center;
-}
-.flist-list-data th {
-  font-size: 16px;
-  font-weight: 500;
-  color: #707070;
-  /* text-align: left; */
-}
-.flist-parent {
-  padding: 0 50px 50px 50px;
-}
-.flist-list-data {
-  background-color: #ffffff;
-  height: 30px;
-}
-.overview-parent-p {
-  font-size: 30px;
-  font-weight: bold;
-  color: #ffa159;
-}
-.overview-parent a {
-  cursor: pointer;
-  font-size: 16px;
-  color: #27b89b;
-}
-.overview-parent div {
-  justify-content: space-between;
-  align-items: center;
-}
-.report-data {
-  margin-left: 10px;
-}
-.report-data p:first-child {
-  margin-bottom: 5px;
-}
-.report-data-parent {
-  justify-content: space-between;
-  padding: 15px 0;
-}
-.report-data-parent div {
-  align-items: center;
-}
-.report-parent-p {
-  font-size: 30px;
-  font-weight: bold;
-  color: #27b89b;
-}
-.report-parent {
+.grid-container {
+  display: flex;
+  padding: 50px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
   margin-bottom: 20px;
 }
-.report-parent,
-.overview-parent {
-  width: 80%;
-  border: solid 1px #ccc;
-  padding: 15px 30px;
-  border-radius: 10px;
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 30px;
+  margin: 20px;
+  text-align: center;
+  width: 200px;
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  font-size: 30px;
+
+  margin: 20px;
+
+  text-align: center;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
 }
-.home {
-  /* justify-content: center; */
-  align-items: center;
+.data-img {
+  width: 100%;
+  height: 100px;
 }
-.c-row {
+.grid-item p {
+  font-size: 14px;
+}
+.grid-item span {
   display: flex;
   flex-direction: row;
-}
-.c-col {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 5px;
 }
 </style>

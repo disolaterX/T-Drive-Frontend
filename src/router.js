@@ -10,102 +10,96 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/t",
-      name: "t",
-      component: () =>
-        import(/* webpackChunkName: "about" */ "@/components/comobobox.vue")
-    },
-    {
       path: "/",
       name: "home",
       component: Home
     },
-    {
-      path: "/profile",
-      name: "Profile",
-      meta: {
-        authRequired: true
-      },
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/Profile.vue")
-    },
     // {
-    //   path: "/auth",
-    //   name: "Auth",
+    //   path: "/profile",
+    //   name: "Profile",
+    //   meta: {
+    //     authRequired: true
+    //   },
     //   // route level code-splitting
     //   // this generates a separate chunk (about.[hash].js) for this route
     //   // which is lazy-loaded when the route is visited.
     //   component: () =>
-    //     import(/* webpackChunkName: "about" */ "@/views/Auth.vue")
+    //     import(/* webpackChunkName: "about" */ "@/views/Profile.vue")
     // },
-    {
-      path: "/verifyofc",
-      name: "VerifyOfc",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/VerifyOfc.vue")
-    },
-    {
-      path: "/verifydri",
-      name: "VerifyDri",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/VerifyDri.vue")
-    },
-    {
-      path: "/batteryreg",
-      name: "Battery Registration",
-      component: () => import("@/views/BatteryForm.vue")
-    },
-    {
-      path: "/vehiclereg",
-      name: "Vehicle Registration",
-      component: () => import("@/views/VehicleForm.vue")
-    },
-    {
-      path: "/franchisee",
-      name: "Franchisee",
-      component: () => import("@/views/Franchisee.vue")
-    },
-    {
-      path: "/franchiseedetails",
-      name: "Franchisee Detail",
-      component: () => import("@/views/Franchiseedetail.vue")
-    },
-    {
-      path: "/alluser",
-      name: "All User",
-      component: () => import("@/views/AllUser.vue")
-    },
-    {
-      path: "/allsales",
-      name: "All Sales",
-      component: () => import("@/views/AllSales.vue")
-    },
-    {
-      path: "/allbattery",
-      name: "All Battery",
-      component: () => import("@/views/AllBattery.vue")
-    },
-    {
-      path: "/addnew",
-      name: "Add New User",
-      component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/AddNewUser.vue")
-    },
-    {
-      path: "/userdetails",
-      name: "User Details",
-      component: () =>
-        import(/* webpackChunkName: "about" */ "@/views/UserDetails.vue")
-    },
+    // // {
+    // //   path: "/auth",
+    // //   name: "Auth",
+    // //   // route level code-splitting
+    // //   // this generates a separate chunk (about.[hash].js) for this route
+    // //   // which is lazy-loaded when the route is visited.
+    // //   component: () =>
+    // //     import(/* webpackChunkName: "about" */ "@/views/Auth.vue")
+    // // },
+    // {
+    //   path: "/verifyofc",
+    //   name: "VerifyOfc",
+    //   // route level code-splitting
+    //   // this generates a separate chunk (about.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () =>
+    //     import(/* webpackChunkName: "about" */ "@/views/VerifyOfc.vue")
+    // },
+    // {
+    //   path: "/verifydri",
+    //   name: "VerifyDri",
+    //   // route level code-splitting
+    //   // this generates a separate chunk (about.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () =>
+    //     import(/* webpackChunkName: "about" */ "@/views/VerifyDri.vue")
+    // },
+    // {
+    //   path: "/batteryreg",
+    //   name: "Battery Registration",
+    //   component: () => import("@/views/BatteryForm.vue")
+    // },
+    // {
+    //   path: "/vehiclereg",
+    //   name: "Vehicle Registration",
+    //   component: () => import("@/views/VehicleForm.vue")
+    // },
+    // {
+    //   path: "/franchisee",
+    //   name: "Franchisee",
+    //   component: () => import("@/views/Franchisee.vue")
+    // },
+    // {
+    //   path: "/franchiseedetails",
+    //   name: "Franchisee Detail",
+    //   component: () => import("@/views/Franchiseedetail.vue")
+    // },
+    // {
+    //   path: "/alluser",
+    //   name: "All User",
+    //   component: () => import("@/views/AllUser.vue")
+    // },
+    // {
+    //   path: "/allsales",
+    //   name: "All Sales",
+    //   component: () => import("@/views/AllSales.vue")
+    // },
+    // {
+    //   path: "/allbattery",
+    //   name: "All Battery",
+    //   component: () => import("@/views/AllBattery.vue")
+    // },
+    // {
+    //   path: "/addnew",
+    //   name: "Add New User",
+    //   component: () =>
+    //     import(/* webpackChunkName: "about" */ "@/views/AddNewUser.vue")
+    // },
+    // {
+    //   path: "/userdetails",
+    //   name: "User Details",
+    //   component: () =>
+    //     import(/* webpackChunkName: "about" */ "@/views/UserDetails.vue")
+    // },
   ]
 });
 
